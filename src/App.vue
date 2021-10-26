@@ -7,7 +7,20 @@
     <router-view/>
   </div>
 </template>
-
+<script>
+export default {
+   provide() {
+    return {
+      $root: this
+    }
+  },
+  data () {
+    return {
+      sysTime: '2020-06-11'
+    }
+  }
+}
+</script>
 <style lang="scss">
 // #app {
 //   font-family: 'Avenir', Helvetica, Arial, sans-serif;

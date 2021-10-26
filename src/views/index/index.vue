@@ -1,8 +1,15 @@
 <template>
   <div>
     <div class="main main_test" @click="test1">111</div>
+    <div class="main main_test" @click="test2">222</div>
     <RenderDom :items="items"></RenderDom>
     <div id="myCharts" ref="myCharts"></div>
+    <div v-if="arr.length">
+    <div v-for="(item, index) in arr" :key="index" @click="add(item)">
+      <div>{{item.name}}</div>
+      <div>{{item.num}}</div>
+    </div>
+    </div>
   </div>
 </template>
 
@@ -10,6 +17,7 @@
 export default {
   data() {
     return {
+      arr: [],
       str: "hello",
       items: [{ name: "a", id: 0 }, { name: "b", id: 1 }, { name: "c", id: 2 }]
     };
@@ -93,10 +101,24 @@ export default {
       myCharts.setOption(options);
     },
     test1() {
+      window.open('/test', "_blank");
       console.log("111");
     },
     test() {
       console.log(this.a);
+    },
+    test2() {
+      let arr = [{
+        name:'mike',
+        num :1
+      }]
+      this.$store.commit('initArr', arr)
+      this.arr = this.$store.state.cartArr
+      console.log(this.$store.state.cartArr, 'cartarr')
+    },
+    add(item) {
+      item.num +=1
+      console.log(this.$store.state.cartArr, 'finalArr')
     }
   }
 };
